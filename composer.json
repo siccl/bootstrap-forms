@@ -23,9 +23,7 @@
 		"teknicode/aws-wrapper" : ">=1.2"
 	},
 	"autoload" : {
-		"psr-4" : {
-			"Teknicode\\Form\\" : "src/"
-		}
+		"classmap" : [ "src/","Form.php" ]
 	},
 	"support" : {
 		"issues" : "https://github.com/siccl/bootstrap-forms/issues"
