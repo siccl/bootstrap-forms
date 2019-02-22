@@ -38,9 +38,9 @@ class Form{
         return $i;
     }
 
-    public function recaptcha($public_key,$private_key=null,$version=2){
+    public function recaptcha($public_key,$private_key=null,$version=2,$groupId=null){
         //todo: use private key here when form and process are merged
-        $i = new Recaptcha($public_key,$private_key,$version);
+        $i = new Recaptcha($public_key,$private_key,$version,$groupId);
         $this->inputs[]=$i;
         return $i;
     }
