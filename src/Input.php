@@ -39,7 +39,7 @@ class Input{
                     ($this->get('id')?'id="'.$this->get('id').'" ':'id="'.$this->get('name').'" ').
                     '>'."\n";
         }
-        $return = '<div class="form-group input-group '. $this->get('groupClass') .'">';
+        $return = '<div class="form-group input-group '. $this->get('groupClass') .'" '.($this->get('groupId')? ' id='. $this->get('groupId') :'').'>';
         if ($this->get('label')!=""){
             $return .= ($this->get('label')?'<label'.($this->get('id')? ' for="'.$this->get('id').'"':'').'>'.$this->get('label').'</label> ':'');
         }elseif ($this->get('addon-feather')!=""){
