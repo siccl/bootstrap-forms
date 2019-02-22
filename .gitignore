@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 .idea
-/vendor/
-=======
-/vendor/
-/.project
->>>>>>> branch 'master' of https://github.com/siccl/bootstrap-forms
+vendor
+.project
+.settings
+.project
