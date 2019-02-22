@@ -1,4 +1,5 @@
 <?php
+// New Changes
 namespace Teknicode\Form;
 class Form{
     private $inputs=[];
@@ -11,10 +12,10 @@ class Form{
         foreach( $args as $key => $value ){
             if($key == "class")$value = "row ".$value;
             if(!in_array($key,["action","method"])){
-                $html .= $key.'="'.$value.'"';
+                $html .= $key.'="'.$value.'" ';
             }
         }
-        $html .= '>';
+        $html .= '>'."\n";
         $this->form = $html;
     }
 
@@ -61,16 +62,16 @@ class Form{
     public function compile(){
         $this->_compile();
 
-        $this->form .= '</form>';
+        $this->form .= '</form>'."\n";
 
         return $this->form;
     }
 
     private function _compile(){
         foreach($this->inputs as $input){
-            $this->form .= '<div class="col-md-'.$input->width.'">';
+            //$this->form .= '<div class="col-md-'.$input->width.'">';
             $this->form .= (method_exists($input,"html") ? $input->html() :$input->html );
-            $this->form .= '</div>';
+            //$this->form .= '</div>';
         }
     }
 }

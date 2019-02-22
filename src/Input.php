@@ -1,4 +1,5 @@
 <?php
+// New Changes
 namespace Teknicode\Form;
 class Input{
     private $attributes = array("class"=>"form-control");
@@ -31,17 +32,29 @@ class Input{
 
     public function html(){
         $atts = '';
-        $return = '<div class="form-group">'.($this->get('label')?'<label'.($this->get('id')? ' for="'.$this->get('id').'"':'').'>'.$this->get('label').'</label> ':'');
-
+        if ($this->get('type')=='hidden'){
+            return '<input type="hidden" '.
+                    ($this->get('name')?'name="'.$this->get('name').'" ':'').
+                    ($this->get('value')?'value="'.$this->get('value').'" ':'').
+                    ($this->get('id')?'id="'.$this->get('id').'" ':'id="'.$this->get('name').'" ').
+                    '>'."\n";
+        }
+        $return = '<div class="form-group input-group '. $this->get('groupClass') .'">';
+        if ($this->get('label')!=""){
+            $return .= ($this->get('label')?'<label'.($this->get('id')? ' for="'.$this->get('id').'"':'').'>'.$this->get('label').'</label> ':'');
+        }elseif ($this->get('addon-feather')!=""){
+            $return .= '<span class="input-group-text"><i data-feather="' . $this->get('addon-feather') . '"></i></span>';
+        }        
+        //input-group-addon
         if(in_array($this->get('type'),["radio","checkbox"])){
             $this->set("class",str_replace("form-control","",$this->get('class')));
         }
 
         unset($this->attributes['label']);
         foreach($this->attributes as $attribute => $value){
-            if($attribute!="options") {
+            if(!in_array($attribute,["options","addon-feather","groupClass"])) {
                 if(in_array($this->get('type'),["textarea","radio"]) && in_array($attribute,["value","type"])) continue;
-                $atts .= (!empty($atts) ? ' ' : '') . $attribute . '="' . $value . '"';
+                $atts .= (!empty($atts) ? ' ' : '') . $attribute . '="' . $value . '" ';
             }
         }
 
@@ -49,16 +62,16 @@ class Input{
             $return .= '<textarea '.$atts.'>'.$this->get('value').'</textarea>';
         }elseif($this->get('type') == "radio"){
             $return .= '<div class="bg-white p-2">';
+            $rowid = 1;
             foreach($this->get('options') as $label => $value){
-                $return .= $label.' <input type="radio" '.$atts.' value="'.$value.'"'.($this->get("value")==$value?' checked="checked"':'').'/> ';
+                $return .= "\n\t". $label.' <input type="radio" id="' . $this->get('name') . '_' . $rowid . '" ' . $atts . ' value="'.$value.'"'.($this->get("value")==$value?' checked="checked"':'').'/>  ';
+                $rowid = $rowid + 1;
             }
-            $return .= '</div>';
+            $return .= '</div>'."\n";
         }else{
             $return .= '<input '.$atts.'/>';
         }
-
-
-        $return .= '</div>';
+        $return .= '</div>'."\n";
         return $return;
     }
 

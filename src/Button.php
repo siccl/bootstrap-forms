@@ -1,4 +1,5 @@
 <?php
+// New Changes
 namespace Teknicode\Form;
 class Button{
     private $attributes = array("class"=>"btn");
@@ -33,6 +34,6 @@ class Button{
         foreach($this->attributes as $attribute => $value){
             if($attribute != "text")$atts .= (!empty($atts)?' ':'').$attribute.'="'.$value.'"';
         }
-        return '<button '.$atts.'>'.$this->attributes['text'].'</button>';
+        return '<button '.$atts.'>'.$this->attributes['text'].'</button>'."\n";
     }
 }
