@@ -1,5 +1,5 @@
 {
-	"name" : "teknicode/bootstrap-forms",
+	"name" : "siccl/bootstrap-forms",
 	"description" : "PHP Class to generate an HTML form with Bootstrap 4 styling. A built in form capture class can send the form via Email, SMS or MySQLi. Includes Google ReCaptcha.",
 	"version" : "2.6.0",
 	"keywords" : [
