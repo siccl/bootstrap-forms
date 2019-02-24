@@ -1,6 +1,7 @@
 <?php
 // New Changes
 namespace Teknicode\Form;
+use Feather\Icons;
 class Input{
     private $attributes = array("class"=>"form-control");
     public $width;
