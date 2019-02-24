@@ -20,10 +20,14 @@
 	"require" : {
 		"php" : ">=5.5",
 		"phpmailer/phpmailer" : ">=6.0.5",
-		"teknicode/aws-wrapper" : ">=1.2"
+		"teknicode/aws-wrapper" : ">=1.2",
+		"pixelrobin/php-feather" : "~1.0"
 	},
 	"autoload" : {
-		"classmap" : [ "src/","src/Form.php" ]
+		"classmap" : [
+			"src/",
+			"src/Form.php"
+		]
 	},
 	"support" : {
 		"issues" : "https://github.com/siccl/bootstrap-forms/issues"

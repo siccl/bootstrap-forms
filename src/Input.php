@@ -43,7 +43,9 @@ class Input{
         if ($this->get('label')!=""){
             $return .= ($this->get('label')?'<label'.($this->get('id')? ' for="'.$this->get('id').'"':'').'>'.$this->get('label').'</label> ':'');
         }elseif ($this->get('addon-feather')!=""){
-            $return .= '<span class="input-group-text"><i data-feather="' . $this->get('addon-feather') . '"></i></span>';
+            //$return .= '<span class="input-group-text"><i data-feather="' . $this->get('addon-feather') . '"></i></span>';
+            $icons = new Feather\Icons;
+            $return .= '<span class="input-group-text">' . $icons->get($this->get('addon-feather')) . '</span>';
         }        
         //input-group-addon
         if(in_array($this->get('type'),["radio","checkbox"])){
