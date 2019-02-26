@@ -5,7 +5,13 @@ class Form{
     private $inputs=[];
     private $form;
     private $layout;
-
+    protected $dbh;
+    function __construct($dbh=""){
+        if (version_compare(phpversion(), '5.6.0', '<')) {
+            die('PHP 5.6.0 required for PHPAuth engine!');
+        }
+        $this->dbh = $dbh;
+    }
     public function open(){
         $args=func_get_args()[0];
         $html = '<form action="'.(empty($args['action'])? $_SERVER['REQUEST_URI'] : $args['action']).'" method="'.(empty($args['method'])? "post" : $args['method']).'" ';
@@ -18,33 +24,33 @@ class Form{
         $html .= '>'."\n";
         $this->form = $html;
     }
-
+    
     public function layout($columns){
         if(!isset($this->layout)){
             $this->layout = new Layout($columns);
         }
         return $this->layout;
     }
-
+    
     public function input($width=12){
         $i = new Input($width);
         $this->inputs[]=$i;
         return $i;
     }
-
+    
     public function select($width=12){
-        $i = new Select($width);
+        $i = new Select($width,$this->dbh);
         $this->inputs[]=$i;
         return $i;
     }
-
+    
     public function recaptcha($public_key,$private_key=null,$version=2,$groupId=null){
         //todo: use private key here when form and process are merged
         $i = new Recaptcha($public_key,$private_key,$version,$groupId);
         $this->inputs[]=$i;
         return $i;
     }
-
+    
     public function html($width=12,$content=null){
         $i = new \stdClass();
         $i->width = $width;
@@ -52,21 +58,21 @@ class Form{
         $this->inputs[]=$i;
         return $i;
     }
-
+    
     public function button($width=12){
         $i = new Button($width);
         $this->inputs[]=$i;
         return $i;
     }
-
+    
     public function compile(){
         $this->_compile();
-
+        
         $this->form .= '</form>'."\n";
-
+        
         return $this->form;
     }
-
+    
     private function _compile(){
         foreach($this->inputs as $input){
             //$this->form .= '<div class="col-md-'.$input->width.'">';
