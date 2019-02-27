@@ -75,6 +75,7 @@ class Select{
                 $data = [];
             }
             //$data = $query->fetch(\PDO::FETCH_ASSOC);
+            $return .= '<option value=""></option>';
             while( $row = $query->fetch()) {
                 $return .= '<option value="' . $row[1] . '"'.($row[1] == $this->get('value') ? ' selected="selected"' : '').'>' . $row[0] . '</option>';
             }
