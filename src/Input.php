@@ -49,8 +49,24 @@ class Input{
         }
         //input-group-addon
         if(in_array($this->get('type'),["radio","checkbox"])){
-            $this->set("class",str_replace("form-control","",$this->get('class')));
+            $this->set("class",str_replace("form-control","form-check",$this->get('class')));
         }
+        /// TODO
+        /*
+         * <div class="form-check form-check-inline">
+         * 
+         *<div class="form-check"> 
+         * 
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+          <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+        </div>
+        */
         
         unset($this->attributes['label']);
         foreach($this->attributes as $attribute => $value){
